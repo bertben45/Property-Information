@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Management</title>
+    <style>
+        /* Layout Framework */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        .site-container { display: flex; flex-direction: column; height: 100vh; }
+        .main-body { display: flex; flex: 1; overflow: hidden; }
+        
+        /* Central Content Area */
+        .content-display { flex: 1; padding: 30px; overflow-y: auto; }
+        
+        /* Tab Containers */
+        .top-tabs { display: flex; background: #f1f1f1; border-bottom: 2px solid #ccc; }
+        .left-tabs, .right-tabs { display: flex; flex-direction: column; background: #f9f9f9; width: 60px; }
+        .left-tabs { border-right: 2px solid #ccc; }
+        .right-tabs { border-left: 2px solid #ccc; }
+        
+        /* Button Styles and Rotations */
+        .tab-btn { padding: 15px; cursor: pointer; border: none; background: none; font-size: 14px; transition: 0.2s; }
+        .vertical { writing-mode: vertical-lr; transform: rotate(180deg); }
+        .vertical-right { writing-mode: vertical-lr; }
+        
+        /* Active state styling */
+        .tab-btn.active { background: #007bff; color: white; font-weight: bold; }
+        .tab-btn:hover:not(.active) { background: #e0e0e0; }
+    </style>
+</head>
+<body>
 
+    <div class="site-container">
+      <!-- Top Navigation Tabs -->
+      <header class="top-tabs">
+        <button class="tab-btn active" onclick="changeContent('Properties Overview', 'Select from the side tabs to view different categories or tools.')">Properties</button>
+        <button class="tab-btn" onclick="changeContent('About Our Company', 'We manage luxury properties with standard-setting customer care.')">About Us</button>
+        <button class="tab-btn" onclick="changeContent('Contact Support', 'Phone: 1-800-555-0199 <br> Email: info@properties.com')">Contact</button>
+      </header>
+
+      <div class="main-body">
+        <!-- Left Side Tabs -->
+        <aside class="left-tabs">
+          <button class="tab-btn vertical" onclick="changeContent('Apartment Listings', 'Browsing premium urban apartments currently available for rent.')">Apartments</button>
+          <button class="tab-btn vertical" onclick="changeContent('Luxury Villas', 'Exploring exclusive detached villas with private pools and views.')">Villas</button>
+          <button class="tab-btn vertical" onclick="changeContent('Commercial Offices', 'Corporate workspaces and commercial buildings in prime districts.')">Offices</button>
+        </aside>
+
+        <!-- Main Content Display -->
+        <main class="content-display">
+          <h1 id="content-title">Properties Overview</h1>
+          <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ccc;">
+          <p id="content-text">Select from the side tabs to view different categories or tools.</p>
+        </main>
+
+        <!-- Right Side Tabs -->
+        <aside class="right-tabs">
+          <button class="tab-btn vertical-right" onclick="changeContent('Price Filter Tool', 'Slide options to filter properties from $150,000 to $2,000,000.')">Filter Price</button>
+          <button class="tab-btn vertical-right" onclick="changeContent('Interactive Map View', 'Loading satellite layout map grids of nearby vacancies...')">Map View</button>
+          <button class="tab-btn vertical-right" onclick="changeContent('Enquiry Form', 'Fill out your contact details to request a physical viewing tour.')">Enquire</button>
+        </aside>
+      </div>
+    </div>
+
+    <!-- JavaScript to Handle Tab Clicking -->
+    <script>
+      function changeContent(title, text) {
+        document.getElementById('content-title').innerHTML = title;
+        document.getElementById('content-text').innerHTML = text;
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+      }
+    </script>
+
+</body>
+</html>

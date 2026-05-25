@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Luxe Properties - Dashboard</title>
-  <!-- Load Lucide Icons Script -->
-  <script src="https://unpkg.com"></script>
+  
+  <!-- Load Font Awesome Icons via verified CDN Link -->
+  <link rel="stylesheet" href="https://cloudflare.com">
+  
   <style>
     * {
       box-sizing: border-box;
@@ -64,7 +66,7 @@
       font-weight: 500;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .nav-tab.active {
@@ -110,7 +112,10 @@
     }
 
     .side-item i {
-      color: #555555;
+      color: #666666;
+      font-size: 1rem;
+      width: 18px;
+      text-align: center;
     }
 
     .side-item.active {
@@ -121,7 +126,7 @@
     }
 
     .side-item.active i {
-      color: #000000;
+      color: #bf5a2b;
     }
 
     /* --- MAIN FEED CONTENT --- */
@@ -201,7 +206,11 @@
       margin-bottom: 15px;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
+    }
+
+    .location i {
+      color: #a0a0a0;
     }
 
     .specs {
@@ -217,6 +226,10 @@
       display: flex;
       align-items: center;
       gap: 6px;
+    }
+
+    .spec-item i {
+      color: #888888;
     }
 
     .btn-details {
@@ -259,6 +272,8 @@
 
     .action-item i {
       color: #666666;
+      width: 16px;
+      text-align: center;
     }
 
     /* Responsive adjustments */
@@ -279,9 +294,9 @@
       <span class="logo-badge">LP</span> Luxe Properties
     </div>
     <nav class="top-nav">
-      <button class="nav-tab active"><i data-lucide="dollar-sign" style="width:16px; height:16px;"></i> Gross Rent</button>
-      <button class="nav-tab"><i data-lucide="clipboard-list" style="width:16px; height:16px;"></i> Expenses</button>
-      <button class="nav-tab"><i data-lucide="trending-up" style="width:16px; height:16px;"></i> Rental Income</button>
+      <button class="nav-tab active"><i class="fa-solid fa-dollar-sign"></i> Gross Rent</button>
+      <button class="nav-tab"><i class="fa-regular fa-clipboard"></i> Expenses</button>
+      <button class="nav-tab"><i class="fa-solid fa-chart-line"></i> Rental Income</button>
     </nav>
     <button class="btn-list-property">List Property</button>
   </header>
@@ -291,9 +306,9 @@
     
     <!-- LEFT SIDEBAR -->
     <aside class="left-sidebar">
-      <a href="#" class="side-item active"><i data-lucide="home" style="width:18px; height:18px;"></i> Built</a>
-      <a href="#" class="side-item"><i data-lucide="image" style="width:18px; height:18px;"></i> Picture</a>
-      <a href="#" class="side-item"><i data-lucide="map-pin" style="width:18px; height:18px;"></i> Location-Maps</a>
+      <a href="#" class="side-item active"><i class="fa-solid fa-house"></i> Built</a>
+      <a href="#" class="side-item"><i class="fa-regular fa-image"></i> Picture</a>
+      <a href="#" class="side-item"><i class="fa-solid fa-map-location-dot"></i> Location-Maps</a>
     </aside>
 
     <!-- CENTER CARDS AREA -->
@@ -308,16 +323,16 @@
         <!-- Card 1 -->
         <div class="property-card">
           <div class="image-container">
-            <span class="price-tag">\$2,450,000</span>
+            <span class="price-tag">$2,450,000</span>
             <img src="https://unsplash.com" alt="Skyline Penthouse">
           </div>
           <div class="card-info">
             <h3>Skyline Penthouse</h3>
-            <p class="location"><i data-lucide="map-pin" style="width:14px; height:14px; color:#999;"></i> Downtown Manhattan</p>
+            <p class="location"><i class="fa-solid fa-map-marker-alt"></i> Downtown Manhattan</p>
             <div class="specs">
-              <span class="spec-item"><i data-lucide="bed" style="width:16px; height:16px;"></i> 3</span>
-              <span class="spec-item"><i data-lucide="bath" style="width:16px; height:16px;"></i> 2</span>
-              <span class="spec-item"><i data-lucide="square" style="width:14px; height:14px;"></i> 2,100 sqft</span>
+              <span class="spec-item"><i class="fa-solid fa-bed"></i> 3</span>
+              <span class="spec-item"><i class="fa-solid fa-bath"></i> 2</span>
+              <span class="spec-item"><i class="fa-regular fa-square"></i> 2,100 sqft</span>
             </div>
             <button class="btn-details">View Details</button>
           </div>
@@ -326,16 +341,16 @@
         <!-- Card 2 -->
         <div class="property-card">
           <div class="image-container">
-            <span class="price-tag">\$1,850,000</span>
+            <span class="price-tag">$1,850,000</span>
             <img src="https://unsplash.com" alt="Harbor View Suite">
           </div>
           <div class="card-info">
             <h3>Harbor View Suite</h3>
-            <p class="location"><i data-lucide="map-pin" style="width:14px; height:14px; color:#999;"></i> Brooklyn Heights</p>
+            <p class="location"><i class="fa-solid fa-map-marker-alt"></i> Brooklyn Heights</p>
             <div class="specs">
-              <span class="spec-item"><i data-lucide="bed" style="width:16px; height:16px;"></i> 2</span>
-              <span class="spec-item"><i data-lucide="bath" style="width:16px; height:16px;"></i> 2</span>
-              <span class="spec-item"><i data-lucide="square" style="width:14px; height:14px;"></i> 1,650 sqft</span>
+              <span class="spec-item"><i class="fa-solid fa-bed"></i> 2</span>
+              <span class="spec-item"><i class="fa-solid fa-bath"></i> 2</span>
+              <span class="spec-item"><i class="fa-regular fa-square"></i> 1,650 sqft</span>
             </div>
             <button class="btn-details">View Details</button>
           </div>
@@ -344,16 +359,16 @@
         <!-- Card 3 -->
         <div class="property-card">
           <div class="image-container">
-            <span class="price-tag">\$3,200,000</span>
+            <span class="price-tag">$3,200,000</span>
             <img src="https://unsplash.com" alt="Central Park Residence">
           </div>
           <div class="card-info">
             <h3>Central Park Residence</h3>
-            <p class="location"><i data-lucide="map-pin" style="width:14px; height:14px; color:#999;"></i> Upper East Side</p>
+            <p class="location"><i class="fa-solid fa-map-marker-alt"></i> Upper East Side</p>
             <div class="specs">
-              <span class="spec-item"><i data-lucide="bed" style="width:16px; height:16px;"></i> 4</span>
-              <span class="spec-item"><i data-lucide="bath" style="width:16px; height:16px;"></i> 3</span>
-              <span class="spec-item"><i data-lucide="square" style="width:14px; height:14px;"></i> 2,800 sqft</span>
+              <span class="spec-item"><i class="fa-solid fa-bed"></i> 4</span>
+              <span class="spec-item"><i class="fa-solid fa-bath"></i> 3</span>
+              <span class="spec-item"><i class="fa-regular fa-square"></i> 2,800 sqft</span>
             </div>
             <button class="btn-details">View Details</button>
           </div>
@@ -364,4 +379,12 @@
 
     <!-- RIGHT ACTION PANEL -->
     <aside class="right-panel">
-      <a href="#" class="action-item"><i data-lucide="sliders-horizontal" style="width:16px; height:16px;"></i> Filter Price</a>
+      <a href="#" class="action-item"><i class="fa-solid fa-sliders"></i> Filter Price</a>
+      <a href="#" class="action-item"><i class="fa-regular fa-map"></i> Map View</a>
+      <a href="#" class="action-item"><i class="fa-regular fa-envelope"></i> Enquire</a>
+    </aside>
+
+  </div>
+
+</body>
+</html>

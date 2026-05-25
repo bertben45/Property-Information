@@ -1,89 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRE Rental Dashboard - Built Specs</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #f3f4f6; min-height: 100vh; flex-direction: column; display: flex; color: #1f2937; }
-        header { background-color: #1e293b; color: white; padding: 15px 20px 15px 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .header-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.25rem; font-weight: bold; color: #ffffff; }
-        .main-wrapper { max-width: 1200px; width: 100%; margin: 0 auto; flex: 1; display: flex; flex-direction: row; padding: 20px; gap: 20px; }
-        aside { width: 260px; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
-        .sub-tab { display: block; text-decoration: none; padding: 14px; background-color: white; border: 1px solid #e5e7eb; border-radius: 12px; text-align: left; box-shadow: 0 1px 3px rgba(0,0,0,0.05); color: #1f2937; }
-        .sub-tab:hover { background-color: #f9fafb; }
-        .sub-tab.active { background-color: #1e293b; color: white; border-color: #1e293b; }
-        .sub-title { font-size: 0.87rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; }
-        .sub-desc { font-size: 0.75rem; margin-top: 2px; color: #6b7280; }
-        .sub-tab.active .sub-desc { color: #9ca3af; }
-        main { flex: 1; background-color: white; border-radius: 16px; border: 1px solid #e5e7eb; padding: 24px; min-height: 400px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .content-header { border-bottom: 1px solid #f3f4f6; padding-bottom: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .content-title { font-size: 1.5rem; font-weight: bold; color: #111827; }
-        .badge { padding: 4px 12px; background-color: #e0e7ff; color: #3730a3; font-size: 0.75rem; font-weight: bold; border-radius: 9999px; text-transform: uppercase; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .card { padding: 16px; background-color: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb; }
-        .card h3 { font-size: 1rem; font-weight: bold; margin-bottom: 8px; color: #1f2937; border-bottom: 1px solid #e5e7eb; padding-bottom: 4px; }
-        .card ul { list-style: none; font-size: 0.875rem; }
-        .card li { margin-bottom: 6px; }
-        .analyses-btn { text-decoration: none; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 24px; background-color: white; border: 1px solid #e5e7eb; border-radius: 16px; text-align: center; color: #1f2937; }
-        .analyses-btn:hover { background-color: #f9fafb; }
-        footer { background-color: #1e293b; color: #9ca3af; text-align: center; padding: 16px; font-size: 0.75rem; border-top: 1px solid #334155; margin-top: auto; }
-        @media (max-width: 768px) { .main-wrapper { flex-direction: column; } aside { width: 100%; } .grid { grid-template-columns: 1fr; } }
-   /* Widen the entire page layout */
-  .header-container, .main-wrapper {
-    max-width: 95% !important;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxe Properties - Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
 
-  /* Shrink the side labels container space */
-  aside {
-    width: 180px !important; /* Narrower from 260px */
-  }
-    </style>
+    body {
+      background-color: #faf9f6;
+      color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* --- TOP HEADER --- */
+    header {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .logo-badge {
+      background-color: #bf5a2b;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .top-nav {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-tab {
+      background: none;
+      border: none;
+      font-size: 0.95rem;
+      color: #666666;
+      cursor: pointer;
+      padding-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .nav-tab.active {
+      color: #bf5a2b;
+      border-bottom: 2px solid #bf5a2b;
+    }
+
+    .btn-list-property {
+      background-color: #bf5a2b;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    /* --- MAIN LAYOUT --- */
+    .dashboard-container {
+      display: flex;
+      flex: 1;
+      max-width: 100%;
+    }
+
+    /* --- LEFT SIDEBAR --- */
+    aside.left-sidebar {
+      width: 200px;
+      background-color: #ffffff;
+      border-right: 1px solid #e5e5e5;
+      padding: 20px 0;
+    }
+
+    .side-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 25px;
+      color: #555555;
+      font-size: 0.9rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .side-item.active {
+      background-color: #f5f5f5;
+      color: #000000;
+      border-left: 4px solid #bf5a2b;
+      padding-left: 21px;
+    }
+
+    /* --- MAIN FEED CONTENT --- */
+    main.content-area {
+      flex: 1;
+      padding: 35px;
+    }
+
+    .content-heading {
+      margin-bottom: 25px;
+    }
+
+    .content-heading h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .content-heading p {
+      color: #666666;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    /* --- PROPERTY GRID --- */
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .property-card {
+      background-color: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .image-container {
+      position: relative;
+      height: 200px;
+      background-color: #e0e0e0;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .price-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #bf5a2b;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .card-info {
+      padding: 20px;
+    }
+
+    .card-info h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .location {
+      color: #666666;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+    }
+
+    .specs {
+      display: flex;
+      gap: 15px;
+      color: #666666;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .btn-details {
+      width: 100%;
+      background-color: #f5f5f5;
+      color: #333333;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background-color 0.2s;
+    }
+
+    .btn-details:hover {
+      background-color: #eaeaea;
+    }
+
+    /* --- RIGHT ACTION PANEL --- */
+    aside.right-panel {
+      width: 180px;
+      background-color: #ffffff;
+      border-left: 1px solid #e5e5e5;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #444444;
+      font-size: 0.9rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      aside.right-panel { display: none; }
+    }
+    @media (max-width: 768px) {
+      .dashboard-container { flex-direction: column; }
+      aside.left-sidebar { width: 100%; border-right: none; border-bottom: 1px solid #e5e5e5; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo">GRE DASHBOARD</div>
-        </div>
-    </header>
-    <div class="main-wrapper">
-        <aside>
-            <a href="index.html" class="sub-tab active"><span class="sub-title">Built</span><span class="sub-desc">Property Specs</span></a>
-            <a href="location.html" class="sub-tab"><span class="sub-title">Location</span><span class="sub-desc">Mapping Data</span></a>
-        </aside>
-        <main>
-            <div class="content-header">
-                <h2 class="content-title">GRE Rental Overview</h2>
-                <span class="badge">Built Mode</span>
-            </div>
-            <div class="grid">
-                <div class="card">
-                    <h3>Structure Specs</h3>
-                    <ul>
-                        <li><strong>Type:</strong> Multi-Family Complex</li>
-                        <li><strong>Units:</strong> 12 Residential Apartments</li>
-                        <li><strong>Year Built:</strong> 2018</li>
-                        <li><strong>Last Inspected:</strong> May 2026</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Compliance & Safety</h3>
-                    <ul>
-                        <li><strong>Occupancy Permit:</strong> Active & Valid</li>
-                        <li><strong>Fire Safety:</strong> Certified (Exp: 2027)</li>
-                        <li><strong>HVAC Rating:</strong> Grade A Optimal</li>
-                    </ul>
-                </div>
-            </div>
-        </main>
-        <aside>
-            <a href="analyses.html" class="analyses-btn">
-                <span class="sub-title">Analises</span>
-                <span class="sub-desc" style="font-size:0.75rem; color:#6b7280;">ROI Metrics</span>
-            </a>
-        </aside>
+
+  <!-- TOP HEADER -->
+  <header>
+    <div class="brand">
+      <span class="logo-badge">LP</span> Luxe Properties
     </div>
-    <footer>&copy; 2026 GRE Rental Portal.</footer>
+    <nav class="top-nav">
+      <button class="nav-tab active">$ Gross Rent</button>
+      <button class="nav-tab">📋 Expenses</button>
+      <button class="nav-tab">📈 Rental Income</button>
+    </nav>
+    <button class="btn-list-property">List Property</button>
+  </header>
+
+  <!-- CONTAINER -->
+  <div class="dashboard-container">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="left-sidebar">
+      <a href="#" class="side-item active">🏠 Built</a>
+      <a href="#" class="side-item">🖼️ Picture</a>
+      <a href="#" class="side-item">📍 Location-Maps</a>
+    </aside>
+
+    <!-- CENTER CARDS AREA -->
+    <main class="content-area">
+      <div class="content-heading">
+        <h1>Built Properties</h1>
+        <p>4 properties available</p>
+      </div>
+
+      <div class="property-grid">
+        
+        <!-- Card 1 -->
+        <div class="property-card">
+          <div class="image-container">
+            <span class="price-tag">$2,450,000</span>
+            <img src="https://unsplash.com" alt="Skyline Penthouse">
+          </div>
+          <div class="card-info">
+            <h3>Skyline Penthouse</h3>
+            <p class="location">📍 Downtown Manhattan</p>
+            <div class="specs">
+              <span>🛏️ 3</span>
+              <span>🛁 2</span>
+              <span>📐 2,100 sqft</span>
+            </div>
+            <button class="btn-details">View Details</button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="property-card">
+          <div class="image-container">
+            <span class="price-tag">$1,850,000</span>
+            <img src="https://unsplash.com" alt="Harbor View Suite">
+          </div>
+          <div class="card-info">
+            <h3>Harbor View Suite</h3>
+            <p class="location">📍 Brooklyn Heights</p>
+            <div class="specs">
+              <span>🛏️ 2</span>
+              <span>🛁 2</span>
+              <span>📐 1,650 sqft</span>
+            </div>
+            <button class="btn-details">View Details</button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="property-card">
+          <div class="image-container">
+            <span class="price-tag">$3,200,000</span>
+            <img src="https://unsplash.com" alt="Central Park Residence">
+          </div>
+          <div class="card-info">
+            <h3>Central Park Residence</h3>
+            <p class="location">📍 Upper East Side</p>
+            <div class="specs">
+              <span>🛏️ 4</span>
+              <span>🛁 3</span>
+              <span>📐 2,800 sqft</span>
+            </div>
+            <button class="btn-details">View Details</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- RIGHT ACTION PANEL -->
+    <aside class="right-panel">
+      <a href="#" class="action-item">🎛️ Filter Price</a>
+      <a href="#" class="action-item">🗺️ Map View</a>
+      <a href="#" class="action-item">✉️ Enquire</a>
+    </aside>
+
+  </div>
+
 </body>
+</html>

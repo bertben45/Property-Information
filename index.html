@@ -31,11 +31,15 @@
         .analyses-btn:hover { background-color: #f9fafb; }
         footer { background-color: #1e293b; color: #9ca3af; text-align: center; padding: 16px; font-size: 0.75rem; border-top: 1px solid #334155; margin-top: auto; }
         @media (max-width: 768px) { .main-wrapper { flex-direction: column; } aside { width: 100%; } .grid { grid-template-columns: 1fr; } }
-     body, .container, main, #dashboard {
-  max-width: 95% !important;
-  width: 1400px !important;
-  margin: 0 auto !important;
-}
+   /* Widen the entire page layout */
+  .header-container, .main-wrapper {
+    max-width: 95% !important;
+  }
+
+  /* Shrink the side labels container space */
+  aside {
+    width: 180px !important; /* Narrower from 260px */
+  }
     </style>
 </head>
 <body>

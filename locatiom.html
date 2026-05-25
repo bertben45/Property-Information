@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRE Rental Dashboard - Location</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #f3f4f6; min-height: 100vh; flex-direction: column; display: flex; color: #1f2937; }
+        header { background-color: #1e293b; color: white; padding: 15px 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .header-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.25rem; font-weight: bold; color: #ffffff; }
+        .main-wrapper { max-width: 1200px; width: 100%; margin: 0 auto; flex: 1; display: flex; flex-direction: row; padding: 20px; gap: 20px; }
+        aside { width: 260px; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+        .sub-tab { display: block; text-decoration: none; padding: 14px; background-color: white; border: 1px solid #e5e7eb; border-radius: 12px; text-align: left; box-shadow: 0 1px 3px rgba(0,0,0,0.05); color: #1f2937; }
+        .sub-tab:hover { background-color: #f9fafb; }
+        .sub-tab.active { background-color: #1e293b; color: white; border-color: #1e293b; }
+        .sub-title { font-size: 0.87rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; }
+        .sub-desc { font-size: 0.75rem; margin-top: 2px; color: #6b7280; }
+        .sub-tab.active .sub-desc { color: #9ca3af; }
+        main { flex: 1; background-color: white; border-radius: 16px; border: 1px solid #e5e7eb; padding: 24px; min-height: 400px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .content-header { border-bottom: 1px solid #f3f4f6; padding-bottom: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .content-title { font-size: 1.5rem; font-weight: bold; color: #111827; }
+        .badge { padding: 4px 12px; background-color: #e0e7ff; color: #3730a3; font-size: 0.75rem; font-weight: bold; border-radius: 9999px; text-transform: uppercase; }
+        .card { padding: 16px; background-color: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb; }
+        .placeholder-box { width: 100%; height: 200px; background-color: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #6b7280; font-size: 0.875rem; font-style: italic; border: 1px dashed #d1d5db; margin-top: 12px; }
+        .analyses-btn { text-decoration: none; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 24px; background-color: white; border: 1px solid #e5e7eb; border-radius: 16px; text-align: center; color: #1f2937; }
+        .analyses-btn:hover { background-color: #f9fafb; }
+        footer { background-color: #1e293b; color: #9ca3af; text-align: center; padding: 16px; font-size: 0.75rem; border-top: 1px solid #334155; margin-top: auto; }
+        @media (max-width: 768px) { .main-wrapper { flex-direction: column; } aside { width: 100%; } }
+    </style>
+</head>
+<body>
+    <header><div class="header-container"><div class="logo">GRE DASHBOARD</div></div></header>
+    <div class="main-wrapper">
+        <aside>
+            <a href="index.html" class="sub-tab"><span class="sub-title">Built</span><span class="sub-desc">Property Specs</span></a>
+            <a href="location.html" class="sub-tab active"><span class="sub-title">Location</span><span class="sub-desc">Mapping Data</span></a>
+        </aside>
+        <main>
+            <div class="content-header">
+                <h2 class="content-title">Geographic Data Hub</h2>
+                <span class="badge">Location Mode</span>
+            </div>
+            <div class="card">
+                <p style="font-size:0.95rem;">Main Operations Center: <strong>100 Real Estate Ave, Corporate District</strong></p>
+                <div class="placeholder-box">[ Geographic Map Grid Blocked by Filter ]</div>
+            </div>
+        </main>
+        <aside>
+            <a href="analyses.html" class="analyses-btn">
+                <span class="sub-title">Analises</span>
+                <span class="sub-desc" style="font-size:0.75rem; color:#6b7280;">ROI Metrics</span>
+            </a>
+        </aside>
+    </div>
+    <footer>&copy; 2026 GRE Rental Portal.</footer>
+</body>
+</html>

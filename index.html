@@ -5,35 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GRE Rental Dashboard</title>
     <style>
-        /* All styles are embedded here so your network filter cannot block them */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #f3f4f6; min-height: 100vh; flex-direction: column; display: flex; color: #1f2937; }
-        
         header { background-color: #1e293b; color: white; padding: 15px 20px 0 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
         .header-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 0.05em; color: #34d399; margin-bottom: 12px; }
-        
         nav { display: flex; gap: 4px; }
         .nav-tab { padding: 10px 20px; background-color: #1e293b; color: #d1d5db; font-weight: 500; border: none; border-top-left-radius: 8px; border-top-right-radius: 8px; cursor: pointer; transition: all 0.2s; border-b: 3px solid transparent; }
         .nav-tab:hover { background-color: #334155; color: white; }
         .nav-tab.active { background-color: #334155; color: white; border-bottom: 3px solid #34d399; }
-
         .main-wrapper { max-width: 1200px; width: 100%; margin: 0 auto; flex: 1; display: flex; flex-direction: row; padding: 20px; gap: 20px; }
-        
         aside { width: 260px; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
-        .sub-tab { w-full; display: flex; flex-direction: column; padding: 14px; background-color: white; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; text-align: left; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .sub-tab { display: flex; flex-direction: column; padding: 14px; background-color: white; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; text-align: left; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .sub-tab:hover { background-color: #f9fafb; }
         .sub-tab.active { background-color: #059669; color: white; border-color: #059669; }
         .sub-title { font-size: 0.87rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; }
         .sub-desc { font-size: 0.75rem; margin-top: 2px; color: #6b7280; }
         .sub-tab.active .sub-desc { color: #e6f4ea; }
-
         main { flex: 1; background-color: white; border-radius: 16px; border: 1px solid #e5e7eb; padding: 24px; min-height: 400px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .content-header { border-bottom: 1px solid #f3f4f6; padding-bottom: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         .content-title { font-size: 1.5rem; font-weight: bold; color: #111827; }
         .badge { padding: 4px 12px; background-color: #e6f4ea; color: #065f46; font-size: 0.75rem; font-weight: bold; border-radius: 9999px; text-transform: uppercase; }
         .badge.analyses-mode { background-color: #e0e7ff; color: #3730a3; }
-
         .analyses-btn { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 24px; background-color: white; border: 1px solid #e5e7eb; border-radius: 16px; cursor: pointer; transition: all 0.2s; text-align: center; }
         .analyses-btn:hover { background-color: #f9fafb; }
         .analyses-btn.active { background-color: #6366f1; color: white; border-color: #4f46e5; }
@@ -41,34 +34,27 @@
         .analyses-btn.active .sub-title { color: white; }
         .analyses-btn .sub-desc { color: #6b7280; }
         .analyses-btn.active .sub-desc { color: #e0e7ff; }
-
-        /* Content Grid & Utility Styles */
+        
+        /* Inner Blocks Styling */
+        .data-view { display: none; }
+        .data-view.show-block { display: block; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .card { padding: 16px; background-color: #f9fafb; border-radius: 12px; border: 1px solid #f3f4f6; }
-        .card h3 { font-size: 1rem; font-weight: bold; margin-bottom: 8px; color: #1f2937; }
+        .card { padding: 16px; background-color: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 15px; }
+        .card h3 { font-size: 1rem; font-weight: bold; margin-bottom: 8px; color: #1f2937; border-bottom: 1px solid #e5e7eb; padding-bottom: 4px; }
         .card ul { list-style: none; font-size: 0.875rem; }
         .card li { margin-bottom: 6px; }
-        .placeholder-box { width: 100%; height: 160px; background-color: #e5e7eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #6b7280; font-size: 0.875rem; font-style: italic; border: 1px dashed #d1d5db; margin-top: 12px; }
-        
+        .placeholder-box { width: 100%; height: 160px; background-color: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #6b7280; font-size: 0.875rem; font-style: italic; border: 1px dashed #d1d5db; margin-top: 12px; }
         table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-top: 12px; }
-        th { background-color: #f3f4f6; padding: 8px; text-align: left; font-weight: bold; }
-        td { padding: 8px; border-bottom: 1px solid #e5e7eb; }
+        th { background-color: #f3f4f6; padding: 10px; text-align: left; font-weight: bold; border-bottom: 2px solid #e5e7eb; }
+        td { padding: 10px; border-bottom: 1px solid #e5e7eb; }
         .cost-text { color: #dc2626; font-weight: 600; }
-        
         .income-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
-        .income-card { background-color: #e6f4ea; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #bbf7d0; }
-        .income-card span { font-size: 0.75rem; color: #4b5563; display: block; }
-        .income-card strong { font-size: 1rem; color: #065f46; }
-        
-        .huge-number { font-size: 2rem; font-weight: 800; color: #059669; margin: 12px 0; }
-
+        .income-card { background-color: #e6f4ea; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #bbf7d0; }
+        .income-card span { font-size: 0.75rem; color: #4b5563; display: block; margin-bottom: 4px; }
+        .income-card strong { font-size: 1.1rem; color: #065f46; }
+        .huge-number { font-size: 2.25rem; font-weight: 800; color: #059669; margin: 12px 0; }
         footer { background-color: #1e293b; color: #9ca3af; text-align: center; padding: 16px; font-size: 0.75rem; border-top: 1px solid #334155; margin-top: auto; }
-
-        @media (max-width: 768px) {
-            .main-wrapper { flex-direction: column; }
-            aside { width: 100%; }
-            .grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 768px) { .main-wrapper { flex-direction: column; } aside { width: 100%; } .grid { grid-template-columns: 1fr; } .income-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -78,9 +64,9 @@
         <div class="header-container">
             <div class="logo">GRE DASHBOARD</div>
             <nav>
-                <button onclick="switchTab('gre-rental')" id="tab-gre-rental" class="nav-tab active">GRE Rental</button>
-                <button onclick="switchTab('expenses')" id="tab-expenses" class="nav-tab">Expenses</button>
-                <button onclick="switchTab('rental-income')" id="tab-rental-income" class="nav-tab">Rental Income</button>
+                <button onclick="changeRoute('gre-rental')" id="tab-gre-rental" class="nav-tab active">GRE Rental</button>
+                <button onclick="changeRoute('expenses')" id="tab-expenses" class="nav-tab">Expenses</button>
+                <button onclick="changeRoute('rental-income')" id="tab-rental-income" class="nav-tab">Rental Income</button>
             </nav>
         </div>
     </header>
@@ -90,80 +76,70 @@
         
         <!-- LEFT SIDEBAR -->
         <aside>
-            <button onclick="switchSubView('built')" id="sub-built" class="sub-tab active">
+            <button onclick="changeSubRoute('built')" id="sub-built" class="sub-tab active">
                 <span class="sub-title">Built</span>
                 <span class="sub-desc">Property Specs</span>
             </button>
-            <button onclick="switchSubView('location')" id="sub-location" class="sub-tab">
+            <button onclick="changeSubRoute('location')" id="sub-location" class="sub-tab">
                 <span class="sub-title">Location</span>
                 <span class="sub-desc">Mapping Data</span>
             </button>
         </aside>
 
-        <!-- CENTER CONSOLE -->
+        <!-- CENTER CONSOLE WITH SECURE PRE-RENDERED VIEWS -->
         <main>
             <div class="content-header">
                 <h2 id="content-title" class="content-title">GRE Rental Overview</h2>
                 <span id="sub-badge" class="badge">Built Mode</span>
             </div>
+            
             <div id="display-window">
-                <!-- Javascript fills this area -->
-            </div>
-        </main>
+                
+                <!-- GRE RENTAL PANELS -->
+                <div id="view-gre-rental-built" class="data-view show-block">
+                    <div class="grid">
+                        <div class="card">
+                            <h3>Structure Specs</h3>
+                            <ul>
+                                <li><strong>Type:</strong> Multi-Family Complex</li>
+                                <li><strong>Units:</strong> 12 Residential Apartments</li>
+                                <li><strong>Year Built:</strong> 2018</li>
+                                <li><strong>Last Inspected:</strong> May 2026</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>Compliance & Safety</h3>
+                            <ul>
+                                <li><strong>Occupancy Permit:</strong> Active & Valid</li>
+                                <li><strong>Fire Safety:</strong> Certified (Exp: 2027)</li>
+                                <li><strong>HVAC Rating:</strong> Grade A Optimal</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- RIGHT SIDEBAR -->
-        <aside>
-            <button onclick="switchSubView('analyses')" id="sub-analyses" class="analyses-btn">
-                <span class="sub-title">Analises</span>
-                <span class="sub-desc">ROI Metrics</span>
-            </button>
-        </aside>
+                <div id="view-gre-rental-location" class="data-view">
+                    <div class="card">
+                        <h3>Geographic Index</h3>
+                        <p style="font-size:0.95rem; margin-bottom: 8px;">Main Operational Hub: <strong>100 Real Estate Ave, Corporate District</strong></p>
+                        <div class="placeholder-box">[ Local Map Display Placeholder Container ]</div>
+                    </div>
+                </div>
 
-    </div>
+                <div id="view-gre-rental-analyses" class="data-view">
+                    <div class="card" style="background-color: #f5f3ff; border-color: #ddd6fe;">
+                        <h3 style="color:#4c1d95;">Portfolio Asset Performance</h3>
+                        <p style="font-size:0.95rem; margin-bottom: 12px;">Active financial performance index metric updates vs regional layout tracking metrics:</p>
+                        <ul style="list-style-type: square; padding-left: 20px; font-size: 0.9rem;">
+                            <li style="margin-bottom:6px;">Current Total Occupancy Rate: <strong style="color:#059669;">94.2% Available Capacity</strong></li>
+                            <li>Market Valuation Trend: <strong style="color:#6366f1;">+5.8% Growth Scale YoY</strong></li>
+                        </ul>
+                    </div>
+                </div>
 
-    <!-- FOOTER -->
-    <footer>
-        &copy; 2026 GRE Rental Portal. Clean Network Version.
-    </footer>
-
-    <!-- INTERACTIVE JAVASCRIPT -->
-    <script>
-        let currentTab = 'gre-rental';
-        let currentSubView = 'built';
-
-        const contentMockData = {
-            'gre-rental': {
-                built: `<div class="grid">
-                            <div class="card">
-                                <h3>Structure Specs</h3>
-                                <ul><li><strong>Type:</strong> Multi-Family Complex</li><li><strong>Units:</strong> 12 Residential Apartments</li><li><strong>Year Built:</strong> 2018</li></ul>
-                            </div>
-                            <div class="card">
-                                <h3>Compliance</h3>
-                                <ul><li><strong>Occupancy Permit:</strong> Active</li><li><strong>Fire Safety:</strong> Certified (Exp: 2027)</li></ul>
-                            </div>
-                        </div>`,
-                location: `<div class="card">
-                            <h3>Geographic Index</h3>
-                            <p style="font-size:0.9rem;">Main Office: <strong>100 Real Estate Ave</strong></p>
-                            <div class="placeholder-box">[ Map Blocked By Filter - Map Placeholder ]</div>
-                           </div>`,
-                analyses: `<div class="card" style="background-color: #f5f3ff; border-color: #ddd6fe;">
-                            <h3 style="color:#4c1d95;">Portfolio Performance</h3>
-                            <p style="font-size:0.9rem;">Occupancy Threshold Target vs Current Metrics:</p>
-                            <p style="margin-top:10px; font-size:0.9rem;">Current Occupancy Rate: <strong style="color:#059669;">94.2%</strong></p>
-                           </div>`
-            },
-            'expenses': {
-                built: `<div>
-                            <h3>Maintenance & Capital Expenses</h3>
-                            <table>
-                                <thead><tr><th>Category</th><th>Vendor</th><th>Cost</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Roof Structural Repair</td><td>Vertex Contractors</td><td class="cost-text">\$4,200</td></tr>
-                                    <tr><td>Plumbing Main Lines</td><td>AquaFix Plumbing</td><td class="cost-text">\$850</td></tr>
-                                </tbody>
-                            </table>
-                        </div>`,
-                location: `<div class="card">
-                            <h3>Regional Operations Costs</h3>
+                <!-- EXPENSES PANELS -->
+                <div id="view-expenses-built" class="data-view">
+                    <div class="card">
+                        <h3>Maintenance & Capital Outlay</h3>
+                        <table>
+                            <thead>

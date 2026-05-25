@@ -376,3 +376,96 @@
           <!-- Cards automatically render here via JS -->
         </div>
       </div>
+        </main>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC BLOCK -->
+  <script>
+    // 1. DYNAMIC CONTENT ROUTING VIEWS
+    function handleSidebarClick(viewName, element) {
+      console.log("Sidebar navigation target selected:", viewName);
+      
+      // Update sidebar styling rules
+      document.querySelectorAll('.side-item').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+
+      // Hide all central layout containers
+      document.querySelectorAll('.dashboard-view').forEach(view => {
+        view.classList.remove('active-view');
+      });
+
+      // Display the structural target view match
+      const targetView = document.getElementById(`view-${viewName}`);
+      if (targetView) {
+        targetView.classList.add('active-view');
+      }
+    }
+
+    function handleTabClick(tabName, element) {
+      console.log("Top navigation tab selected:", tabName);
+      
+      // Update top header tabs navigation active highlight
+      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+
+      // Change dynamic layout text values based on active tab state
+      const textConfig = {
+        'gross-rent': { title: "Built Properties (Gross Rent)", sub: "4 properties available" },
+        'expenses': { title: "Operating Overhead Expenses", sub: "Annual tracking parameters active" },
+        'rental-income': { title: "Net Yield Income Revenue", sub: "Calculated profit evaluations active" }
+      };
+
+      const heading = document.getElementById('dynamic-heading');
+      const subHeading = document.getElementById('dynamic-subheading');
+      
+      if (heading && subHeading && textConfig[tabName]) {
+        heading.innerText = textConfig[tabName].title;
+        subHeading.innerText = textConfig[tabName].sub;
+      }
+    }
+
+    // 2. BACKEND STORAGE EMULATION OBJECTS (PROPERTY COMPONENT SCHEMAS)
+    const propertiesData = [
+      { title: "Luxe Villa", price: "$4,500/mo", loc: "Los Angeles, CA", beds: 4, baths: 3 },
+      { title: "Modern Condo", price: "$2,800/mo", loc: "Miami, FL", beds: 2, baths: 2 },
+      { title: "Urban Penthouse", price: "$6,200/mo", loc: "New York, NY", beds: 3, baths: 3.5 },
+      { title: "Cozy Suburban Home", price: "$3,100/mo", loc: "Austin, TX", beds: 3, baths: 2 }
+    ];
+
+    // 3. UI GENERATION PIPELINE ENGINE
+    function renderProperties() {
+      const grid = document.getElementById('property-grid-target');
+      if (!grid) return;
+      
+      grid.innerHTML = propertiesData.map(prop => `
+        <div class="property-card">
+          <div class="image-container">
+            <span class="price-tag">${prop.price}</span>
+          </div>
+          <div class="card-info">
+            <h3>${prop.title}</h3>
+            <div class="location">
+              <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              ${prop.loc}
+            </div>
+            <div class="specs">
+              <span class="spec-item">
+                <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16M22 4v16M2 8h20M2 14h20"></path></svg>
+                ${prop.beds} Beds
+              </span>
+              <span class="spec-item">
+                <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"></path></svg>
+                ${prop.baths} Baths
+              </span>
+            </div>
+            <button class="btn-details">View Details</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Execute application load hook parameters automatically
+    window.addEventListener('DOMContentLoaded', renderProperties);
+  </script>
+</body>
+</html>

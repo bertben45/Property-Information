@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Luxe Properties - Dashboard</title>
   
-  <!-- Load Font Awesome Icons via verified CDN Link -->
-  <link rel="stylesheet" href="https://cloudflare.com">
-  
   <style>
     * {
       box-sizing: border-box;
@@ -111,10 +108,9 @@
       font-weight: 500;
     }
 
-    .side-item i {
-      color: #666666;
-      font-size: 1rem;
-      width: 18px;
+    .side-icon {
+      font-size: 1.1rem;
+      width: 20px;
       text-align: center;
     }
 
@@ -123,10 +119,6 @@
       color: #000000;
       border-left: 4px solid #bf5a2b;
       padding-left: 21px;
-    }
-
-    .side-item.active i {
-      color: #bf5a2b;
     }
 
     /* --- MAIN FEED CONTENT --- */
@@ -209,10 +201,6 @@
       gap: 6px;
     }
 
-    .location i {
-      color: #a0a0a0;
-    }
-
     .specs {
       display: flex;
       gap: 15px;
@@ -226,10 +214,6 @@
       display: flex;
       align-items: center;
       gap: 6px;
-    }
-
-    .spec-item i {
-      color: #888888;
     }
 
     .btn-details {
@@ -270,12 +254,6 @@
       font-weight: 500;
     }
 
-    .action-item i {
-      color: #666666;
-      width: 16px;
-      text-align: center;
-    }
-
     /* Responsive adjustments */
     @media (max-width: 1024px) {
       aside.right-panel { display: none; }
@@ -294,9 +272,9 @@
       <span class="logo-badge">LP</span> Luxe Properties
     </div>
     <nav class="top-nav">
-      <button class="nav-tab active"><i class="fa-solid fa-dollar-sign"></i> Gross Rent</button>
-      <button class="nav-tab"><i class="fa-regular fa-clipboard"></i> Expenses</button>
-      <button class="nav-tab"><i class="fa-solid fa-chart-line"></i> Rental Income</button>
+      <button class="nav-tab active"><span style="font-weight: bold; color: #bf5a2b;">$</span> Gross Rent</button>
+      <button class="nav-tab">📋 Expenses</button>
+      <button class="nav-tab">📊 Rental Income</button>
     </nav>
     <button class="btn-list-property">List Property</button>
   </header>
@@ -306,9 +284,9 @@
     
     <!-- LEFT SIDEBAR -->
     <aside class="left-sidebar">
-      <a href="#" class="side-item active"><i class="fa-solid fa-house"></i> Built</a>
-      <a href="#" class="side-item"><i class="fa-regular fa-image"></i> Picture</a>
-      <a href="#" class="side-item"><i class="fa-solid fa-map-location-dot"></i> Location-Maps</a>
+      <a href="#" class="side-item active"><span class="side-icon">🏢</span> Built</a>
+      <a href="#" class="side-item"><span class="side-icon">🖼️</span> Picture</a>
+      <a href="#" class="side-item"><span class="side-icon">📍</span> Location-Maps</a>
     </aside>
 
     <!-- CENTER CARDS AREA -->
@@ -328,11 +306,11 @@
           </div>
           <div class="card-info">
             <h3>Skyline Penthouse</h3>
-            <p class="location"><i class="fa-solid fa-map-marker-alt"></i> Downtown Manhattan</p>
+            <p class="location">📍 Downtown Manhattan</p>
             <div class="specs">
-              <span class="spec-item"><i class="fa-solid fa-bed"></i> 3</span>
-              <span class="spec-item"><i class="fa-solid fa-bath"></i> 2</span>
-              <span class="spec-item"><i class="fa-regular fa-square"></i> 2,100 sqft</span>
+              <span class="spec-item">🛏️ 3</span>
+              <span class="spec-item">🛁 2</span>
+              <span class="spec-item">📐 2,100 sqft</span>
             </div>
             <button class="btn-details">View Details</button>
           </div>
@@ -346,11 +324,11 @@
           </div>
           <div class="card-info">
             <h3>Harbor View Suite</h3>
-            <p class="location"><i class="fa-solid fa-map-marker-alt"></i> Brooklyn Heights</p>
+            <p class="location">📍 Brooklyn Heights</p>
             <div class="specs">
-              <span class="spec-item"><i class="fa-solid fa-bed"></i> 2</span>
-              <span class="spec-item"><i class="fa-solid fa-bath"></i> 2</span>
-              <span class="spec-item"><i class="fa-regular fa-square"></i> 1,650 sqft</span>
+              <span class="spec-item">🛏️ 2</span>
+              <span class="spec-item">🛁 2</span>
+              <span class="spec-item">📐 1,650 sqft</span>
             </div>
             <button class="btn-details">View Details</button>
           </div>
@@ -364,11 +342,11 @@
           </div>
           <div class="card-info">
             <h3>Central Park Residence</h3>
-            <p class="location"><i class="fa-solid fa-map-marker-alt"></i> Upper East Side</p>
+            <p class="location">📍 Upper East Side</p>
             <div class="specs">
-              <span class="spec-item"><i class="fa-solid fa-bed"></i> 4</span>
-              <span class="spec-item"><i class="fa-solid fa-bath"></i> 3</span>
-              <span class="spec-item"><i class="fa-regular fa-square"></i> 2,800 sqft</span>
+              <span class="spec-item">🛏️ 4</span>
+              <span class="spec-item">🛁 3</span>
+              <span class="spec-item">📐 2,800 sqft</span>
             </div>
             <button class="btn-details">View Details</button>
           </div>
@@ -379,9 +357,9 @@
 
     <!-- RIGHT ACTION PANEL -->
     <aside class="right-panel">
-      <a href="#" class="action-item"><i class="fa-solid fa-sliders"></i> Filter Price</a>
-      <a href="#" class="action-item"><i class="fa-regular fa-map"></i> Map View</a>
-      <a href="#" class="action-item"><i class="fa-regular fa-envelope"></i> Enquire</a>
+      <a href="#" class="action-item">🎚️ Filter Price</a>
+      <a href="#" class="action-item">🗺️ Map View</a>
+      <a href="#" class="action-item">✉️ Enquire</a>
     </aside>
 
   </div>

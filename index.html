@@ -3,76 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Management</title>
-    <style>
-        /* Layout Framework */
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-        .site-container { display: flex; flex-direction: column; height: 100vh; }
-        .main-body { display: flex; flex: 1; overflow: hidden; }
-        
-        /* Central Content Area */
-        .content-display { flex: 1; padding: 30px; overflow-y: auto; }
-        
-        /* Tab Containers */
-        .top-tabs { display: flex; background: #f1f1f1; border-bottom: 2px solid #ccc; }
-        .left-tabs, .right-tabs { display: flex; flex-direction: column; background: #f9f9f9; width: 60px; }
-        .left-tabs { border-right: 2px solid #ccc; }
-        .right-tabs { border-left: 2px solid #ccc; }
-        
-        /* Button Styles and Rotations */
-        .tab-btn { padding: 15px; cursor: pointer; border: none; background: none; font-size: 14px; transition: 0.2s; }
-        .vertical { writing-mode: vertical-lr; transform: rotate(180deg); }
-        .vertical-right { writing-mode: vertical-lr; }
-        
-        /* Active state styling */
-        .tab-btn.active { background: #007bff; color: white; font-weight: bold; }
-        .tab-btn:hover:not(.active) { background: #e0e0e0; }
-    </style>
+    <title>GRE Rental Dashboard</title>
+    <!-- Tailwind CSS for modern layout & design -->
+    <script src="https://tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
-<body>
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
 
-    <div class="site-container">
-      <!-- Top Navigation Tabs -->
-      <header class="top-tabs">
-        <button class="tab-btn active" onclick="changeContent('Properties Overview', 'Select from the side tabs to view different categories or tools.')">Properties</button>
-        <button class="tab-btn" onclick="changeContent('About Our Company', 'We manage luxury properties with standard-setting customer care.')">About Us</button>
-        <button class="tab-btn" onclick="changeContent('Contact Support', 'Phone: 1-800-555-0199 <br> Email: info@properties.com')">Contact</button>
-      </header>
+    <!-- TOP HEADER / TABS (From your sketch) -->
+    <header class="bg-slate-800 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center pt-4">
+            <div class="text-xl font-bold tracking-wider text-emerald-400 mb-3 sm:mb-0">
+                <i class="fa-solid fa-building-user mr-2"></i>GRE DASHBOARD
+            </div>
+            
+            <!-- Main Top Navigation Tabs -->
+            <nav class="flex space-x-1">
+                <button onclick="switchTab('gre-rental')" id="tab-gre-rental" class="nav-tab px-5 py-2.5 bg-slate-700 text-white font-medium rounded-t-lg border-b-2 border-emerald-400 focus:outline-none transition-all">
+                    GRE Rental
+                </button>
+                <button onclick="switchTab('expenses')" id="tab-expenses" class="nav-tab px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-gray-300 font-medium rounded-t-lg border-b-2 border-transparent focus:outline-none transition-all">
+                    Expenses
+                </button>
+                <button onclick="switchTab('rental-income')" id="tab-rental-income" class="nav-tab px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-gray-300 font-medium rounded-t-lg border-b-2 border-transparent focus:outline-none transition-all">
+                    Rental Income
+                </button>
+            </nav>
+        </div>
+    </header>
 
-      <div class="main-body">
-        <!-- Left Side Tabs -->
-        <aside class="left-tabs">
-          <button class="tab-btn vertical" onclick="changeContent('Apartment Listings', 'Browsing premium urban apartments currently available for rent.')">Apartments</button>
-          <button class="tab-btn vertical" onclick="changeContent('Luxury Villas', 'Exploring exclusive detached villas with private pools and views.')">Villas</button>
-          <button class="tab-btn vertical" onclick="changeContent('Commercial Offices', 'Corporate workspaces and commercial buildings in prime districts.')">Offices</button>
+    <!-- MAIN APP WRAPPER -->
+    <div class="max-w-7xl w-full mx-auto flex-1 flex flex-col md:flex-row p-4 gap-4">
+        
+        <!-- LEFT SIDEBAR TABS (BUILT & LOCATION) -->
+        <aside class="w-full md:w-64 flex flex-col gap-3">
+            <button onclick="switchSubView('built')" id="sub-built" class="sub-tab w-full flex items-center gap-3 px-4 py-3.5 bg-emerald-600 text-white font-semibold rounded-xl shadow-sm hover:bg-emerald-700 transition-all text-left">
+                <i class="fa-solid fa-hammer text-lg"></i>
+                <div>
+                    <span class="block text-sm font-bold uppercase tracking-wider">Built</span>
+                    <span class="text-xs font-normal opacity-80">Property Construction & Specs</span>
+                </div>
+            </button>
+            
+            <button onclick="switchSubView('location')" id="sub-location" class="sub-tab w-full flex items-center gap-3 px-4 py-3.5 bg-white text-gray-700 font-semibold rounded-xl shadow-sm hover:bg-gray-50 border border-gray-200 transition-all text-left">
+                <i class="fa-solid fa-map-location-dot text-emerald-500 text-lg"></i>
+                <div>
+                    <span class="block text-sm font-bold uppercase tracking-wider text-gray-900">Location</span>
+                    <span class="text-xs font-normal text-gray-500">Mapping & Geographic Data</span>
+                </div>
+            </button>
         </aside>
 
-        <!-- Main Content Display -->
-        <main class="content-display">
-          <h1 id="content-title">Properties Overview</h1>
-          <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ccc;">
-          <p id="content-text">Select from the side tabs to view different categories or tools.</p>
+        <!-- CENTRAL CONTENT MAIN WINDOW -->
+        <main class="flex-1 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 min-h-[450px]">
+            <!-- Dynamic Headline showing active route state -->
+            <div class="border-b border-gray-100 pb-4 mb-6 flex justify-between items-center">
+                <h2 id="content-title" class="text-2xl font-bold text-gray-800">GRE Rental Overview</h2>
+                <span id="sub-badge" class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full uppercase tracking-wide">Built Mode</span>
+            </div>
+
+            <!-- CONTENT VIEWS Container -->
+            <div id="display-window" class="text-gray-600 space-y-4">
+                <!-- Content will dynamically update here via JS -->
+                <p>Loading view options...</p>
+            </div>
         </main>
 
-        <!-- Right Side Tabs -->
-        <aside class="right-tabs">
-          <button class="tab-btn vertical-right" onclick="changeContent('Price Filter Tool', 'Slide options to filter properties from $150,000 to $2,000,000.')">Filter Price</button>
-          <button class="tab-btn vertical-right" onclick="changeContent('Interactive Map View', 'Loading satellite layout map grids of nearby vacancies...')">Map View</button>
-          <button class="tab-btn vertical-right" onclick="changeContent('Enquiry Form', 'Fill out your contact details to request a physical viewing tour.')">Enquire</button>
+        <!-- RIGHT SIDEBAR TAB (ANALISES) -->
+        <aside class="w-full md:w-64">
+            <button onclick="switchSubView('analyses')" id="sub-analyses" class="w-full flex flex-col items-center justify-center p-6 bg-white text-gray-700 font-semibold rounded-2xl shadow-sm hover:bg-gray-50 border border-gray-200 transition-all gap-2 text-center group">
+                <div class="p-3 bg-indigo-50 group-hover:bg-indigo-100 rounded-full transition-colors">
+                    <i class="fa-solid fa-chart-pie text-indigo-600 text-2xl"></i>
+                </div>
+                <span class="block text-base font-bold uppercase tracking-wider text-gray-900">Analises</span>
+                <span class="text-xs font-normal text-gray-500">Financial Forecasts & ROI metrics</span>
+            </button>
         </aside>
-      </div>
+
     </div>
 
-    <!-- JavaScript to Handle Tab Clicking -->
-    <script>
-      function changeContent(title, text) {
-        document.getElementById('content-title').innerHTML = title;
-        document.getElementById('content-text').innerHTML = text;
-        const buttons = document.querySelectorAll('.tab-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-      }
-    </script>
+    <!-- FOOTER -->
+    <footer class="bg-slate-800 text-gray-400 text-center py-4 text-xs border-t border-slate-700 mt-auto">
+        &copy; 2026 GRE Rental Portal. Prototyped from User Hand-Sketched Design.
+    </footer>
 
-</body>
-</html>
+    <!-- INTERACTIVE SCRIPTING -->
+    <script>
+        // State tracker variables
+        let currentTab = 'gre-rental';
+        let currentSubView = 'built';
+
+        // Sample Data Repository to simulate actual database values
+        const contentMockData = {
+            'gre-rental': {
+                built: `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
+                                <h3 class="font-bold text-gray-800 mb-2"><i class="fa-solid fa-house-circle-check text-emerald-500 mr-2"></i>Structure Specs</h3>
+                                <ul class="space-y-1 text-sm"><li><strong>Type:</strong> Multi-Family Complex</li><li><strong>Units:</strong> 12 Residential Apartments</li><li><strong>Year Built:</strong> 2018</li><li><strong>Last Renovated:</strong> 2024</li></ul>
+                            </div>
+                            <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
+                                <h3 class="font-bold text-gray-800 mb-2"><i class="fa-solid fa-shield-halved text-emerald-500 mr-2"></i>Compliance & Permits</h3>
+                                <ul class="space-y-1 text-sm"><li><strong>Occupancy Permit:</strong> Active</li><li><strong>Fire Safety:</strong> Certified (Exp: 2027)</li><li><strong>HVAC Status:</strong> Inspected</li></ul>
+                            </div>
+                        </div>`,
+                location: `<div class="p-4 bg-gray-50 rounded-xl border border-gray-100 space-y-3">
+                            <h3 class="font-bold text-gray-800"><i class="fa-solid fa-location-crosshairs text-emerald-500 mr-2"></i>Geographic Index</h3>
+                            <p class="text-sm">Main Office: <strong>100 Real Estate Ave, Suite B</strong></p>
+                            <div class="w-full h-40 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 text-sm italic border border-dashed border-gray-300">
+                                [ Interactive Geographic Map Placeholder ]
+                            </div>
+                           </div>`,
+                analyses: `<div class="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                            <h3 class="font-bold text-indigo-900 mb-2"><i class="fa-solid fa-chart-line text-indigo-500 mr-2"></i>Portfolio Asset Performance</h3>
+                            <p class="text-sm mb-3">Overall financial performance assessment index tracking occupancy thresholds vs local market trends.</p>
+                            <div class="flex items-center gap-4 text-sm font-semibold text-gray-700">
+                                <div>Occupancy Rate: <span class="text-emerald-600 font-bold">94.2%</span></div>
+                                <div>Market Valuation Yield: <span class="text-indigo-600 font-bold">+5.8% YoY</span></div>
+                            </div>
+                           </div>`
+            },
+            'expenses': {
+                built: `<div class="space-y-3">
+                            <h3 class="font-bold text-gray-800">Maintenance & Capital Expenses</h3>
+                            <table class="w-full text-sm text-left border-collapse">
+                                <thead><tr class="bg-gray-100 text-gray-700 font-bold"><th class="p-2">Category</th><th class="p-2">Vendor</th><th class="p-2">Cost</th></tr></thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr><td class="p-2">Roof Structural Repair</td><td class="p-2">Vertex Contractors</td><td class="p-2 text-red-600 font-semibold">$4,200</td></tr>
+                                    <tr><td class="p-2">Plumbing Main Lines</td><td class="p-2">AquaFix Plumbing</td><td class="p-2 text-red-600 font-semibold">$850</td></tr>
+                                </tbody>
+                            </table>
+                        </div>`,
+                location: `<div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
+                            <h3 class="font-bold text-gray-800 mb-2">Regional Operations Costs</h3>
+                            <p class="text-sm">Regional utility taxes and city-specific zoning fees break-down:</p>
+                            <ul class="list-disc pl-5 mt-2 text-sm space-y-1">
+                                <li>District Trash/Recycling Service: $310/mo</li>
+                                <li>Municipal Property Assessment Tax: $2,400/yr</li>
+                            </ul>
+                           </div>`,

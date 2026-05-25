@@ -375,3 +375,61 @@
         <div class="property-grid">
           
           <!-- Card 1 -->
+                </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC BLOCK -->
+  <script>
+    // Fixes the ReferenceErrors by defining the functions your HTML buttons are looking for
+    function handleSidebarClick(viewName, element) {
+      console.log("Sidebar clicked:", viewName);
+      document.querySelectorAll('.side-item').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+    }
+
+    function handleTabClick(tabName, element) {
+      console.log("Tab clicked:", tabName);
+      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+    }
+
+    // Temporary mock data array to populate your property grid cards automatically
+    const propertiesData = [
+      { title: "Luxe Villa", price: "$4,500/mo", loc: "Los Angeles, CA", beds: 4, baths: 3 },
+      { title: "Modern Condo", price: "$2,800/mo", loc: "Miami, FL", beds: 2, baths: 2 },
+      { title: "Urban Penthouse", price: "$6,200/mo", loc: "New York, NY", beds: 3, baths: 3.5 },
+      { title: "Cozy Suburban Home", price: "$3,100/mo", loc: "Austin, TX", beds: 3, baths: 2 }
+    ];
+
+    // Renders the cards into your .property-grid element
+    function renderProperties() {
+      const grid = document.querySelector('.property-grid');
+      if (!grid) return;
+      
+      grid.innerHTML = propertiesData.map(prop => `
+        <div class="property-card">
+          <div class="image-container">
+            <span class="price-tag">${prop.price}</span>
+          </div>
+          <div class="card-info">
+            <h3>${prop.title}</h3>
+            <div class="location">${prop.loc}</div>
+            <div class="specs">
+              <span class="spec-item">${prop.beds} Beds</span>
+              <span class="spec-item">${prop.baths} Baths</span>
+            </div>
+            <button class="btn-details">View Details</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Runs the render function automatically as soon as the page loads
+    window.addEventListener('DOMContentLoaded', renderProperties);
+  </script>
+</body>
+</html>
+          
+          
